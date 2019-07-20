@@ -1,0 +1,235 @@
+{% extends "bootstrap/base.html" %}
+
+{# 定义网页属性 #}
+{% block html_attribs %} lang="zh"{% endblock %}
+
+{# 定义网页head头部中全部的内容 #}
+{% block head %}
+    {{ super() }}
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('.static', filename='images/pics/xiaohui.ico')}}"
+          type="image/vnd.microsoft.icon">
+    {# 外部样式表的每一次更改都需要删除再新建样式表 更改样式不成功时查看网页源代码 #}
+    <link rel="stylesheet" href="{{url_for('.static',filename='css/footer.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static',filename='css/navbar-a.css')}}">
+    <link rel="stylesheet" href="{{url_for('.static',filename='css/dash+offcan.css')}}">
+{% endblock %}
+
+{# 网页标题 #}
+{% block title %}SCNU-DxcAssociation{% endblock %}
+
+{% block navbar %}
+    <div class="navbar-wrapper" >
+        <div>
+            <nav class="navbar navbar-inverse navbar-static-top"
+                 role="navigation" style="border-radius: 4px">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                                aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand">
+                            <img src="../static/images/pics/navbarXiaohui.png"
+                                 style="width: 54px;height: 54px;position: relative;top: -17px;">
+                        </a>
+                        <a class="navbar-brand" href="{{ url_for('home') }}" style="font-family: inherit"><strong>华师校园通</strong></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse" style="font-size: 15px">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="active"><a href="{{ url_for('home') }}">首页</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('introduction') }}">华师简介</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('websites') }}">学校网站</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('offices') }}">学校办事处</a></li>
+                            {#下拉框的制作#}
+                            <li class="dropdown">
+                                <a id="navbar-a" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">学校社团 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('association_dxc') }}">大学城校区</a></li>
+                                    <li><a href="{{ url_for('association_sp') }}">石牌校区</a></li>
+                                    <li><a href="{{ url_for('association_nh') }}">南海校区</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a>欢迎：{{ userunit }} {{ userxm }} {{ usertype }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <style type="text/css">
+        #marketing .col-lg-4 {
+          margin-bottom: 20px;
+          text-align: center;
+        }
+        #marketing h2 {
+          font-weight: normal;
+        }
+        #marketing .col-lg-4 p {
+          margin-right: 10px;
+          margin-left: 10px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="row row-offcanvas row-offcanvas-left">
+            <div class="col-sm-3 col-md-2 sidebar-offcanvas" id="sidebar"
+                 style="font-size: 16px">
+                <div class="list-group" style="margin-left: 10px;width: 180px">
+                    <a href="#" class="list-group-item active">社团类型</a>
+                    <a href="#" class="list-group-item" id="shsjl">社会实践类</a>
+                    <a href="#" class="list-group-item" id="wytyl">文娱体育类</a>
+                    <a href="#" class="list-group-item" id="xskjl">学术科技类</a>
+                    <a href="#" class="list-group-item" id="xqahl">兴趣爱好类</a>
+                    <a href="#" class="list-group-item" id="yjsl">院级社联</a>
+                </div>
+            </div>
+
+            <div class="col-sm-9 col-md-10 main" id="marketing">
+                <h2 class="page-header" style="margin-top: 0">华师大学城校区学生社团</h2>
+                <p class="lead">
+                    "华师各校区的社团简介和特色活动都在这里！"
+                </p>
+                <p class="pull-left visible-xs">
+                    <button type="button" class="btn btn-primary btn-xs pull-left visible-xs" data-toggle="offcanvas"
+                            style="margin-right: 10px; font-size: 16px">
+                        社团类型</button>
+                </p>
+                <h3 class="sub-header" id="sub-title">
+                      <span class="glyphicon glyphicon-hand-left"></span> 点击感兴趣的社团类型
+                </h3>
+                <div class="table-responsive">
+                    <table class="table table-striped" style="font-size: 16px">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">社团名称</th>
+                                <th style="text-align: center">社团简介</th>
+                                <th style="text-align: center">特色活动</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataset">
+                            <tr>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer" style="text-align: center">
+            <p>&copy; 2019 Joywvii, SCNU.</p>
+        </footer>
+
+        <a href="#" style="position:fixed;right:3%;bottom:10%;text-decoration-line: none"
+           data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="回到顶部">
+            <span class="glyphicon glyphicon-chevron-up" style="font-size: 35px; color: black"></span>
+        </a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/MyJs.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('.static', filename='js/offcanvas.js') }}"></script>
+    <script type="text/javascript">
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        $(function() {
+            $('a#shsjl').bind('click', function() {
+                $('#dataset').empty();
+                $('#sub-title').text("社会实践类社团");
+                $.getJSON($SCRIPT_ROOT + '/association-dxc/', {
+                    leixing: $('#shsjl').text()
+                }, function(data) {
+                    var result = $.parseJSON(data);
+                    $.each(result, function(i, item) {
+                        var tr;
+                        tr='<td>'+item.name+'</td>'+'<td>'+item.introduction+'</td>'+'<td>'+item.activities+'</td>';
+                        $("#dataset").append('<tr>'+tr+'</tr>');
+                    });
+
+                });
+                return false;
+            });
+        });
+        $(function() {
+            $('a#wytyl').bind('click', function() {
+                $('#dataset').empty();
+                $('#sub-title').text("文娱体育类社团");
+                $.getJSON($SCRIPT_ROOT + '/association-dxc/', {
+                    leixing: $('#wytyl').text()
+                }, function(data) {
+                    var result = $.parseJSON(data);
+                    $.each(result, function(i, item) {
+                        var tr;
+                        tr='<td>'+item.name+'</td>'+'<td>'+item.introduction+'</td>'+'<td>'+item.activities+'</td>';
+                        $("#dataset").append('<tr>'+tr+'</tr>');
+                    });
+
+                });
+                return false;
+            });
+        });
+        $(function() {
+            $('a#xskjl').bind('click', function() {
+                $('#dataset').empty();
+                $('#sub-title').text("学术科技类社团");
+                $.getJSON($SCRIPT_ROOT + '/association-dxc/', {
+                    leixing: $('#xskjl').text()
+                }, function(data) {
+                    var result = $.parseJSON(data);
+                    $.each(result, function(i, item) {
+                        var tr;
+                        tr='<td>'+item.name+'</td>'+'<td>'+item.introduction+'</td>'+'<td>'+item.activities+'</td>';
+                        $("#dataset").append('<tr>'+tr+'</tr>');
+                    });
+
+                });
+                return false;
+            });
+        });
+        $(function() {
+            $('a#xqahl').bind('click', function() {
+                $('#dataset').empty();
+                $('#sub-title').text("兴趣爱好类社团");
+                $.getJSON($SCRIPT_ROOT + '/association-dxc/', {
+                    leixing: $('#xqahl').text()
+                }, function(data) {
+                    var result = $.parseJSON(data);
+                    $.each(result, function(i, item) {
+                        var tr;
+                        tr='<td>'+item.name+'</td>'+'<td>'+item.introduction+'</td>'+'<td>'+item.activities+'</td>';
+                        $("#dataset").append('<tr>'+tr+'</tr>');
+                    });
+                });
+                return false;
+            });
+        });
+        $(function() {
+            $('a#yjsl').bind('click', function() {
+                $('#dataset').empty();
+                $('#sub-title').text("院级社联");
+                $.getJSON($SCRIPT_ROOT + '/association-dxc/', {
+                    leixing: $('#yjsl').text()
+                }, function(data) {
+                    var result = $.parseJSON(data);
+                    $.each(result, function(i, item) {
+                        var tr;
+                        tr='<td>'+item.name+'</td>'+'<td>'+item.introduction+'</td>'+'<td>'+item.activities+'</td>';
+                        $("#dataset").append('<tr>'+tr+'</tr>');
+                    });
+                });
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

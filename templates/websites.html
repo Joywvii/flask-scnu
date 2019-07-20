@@ -1,0 +1,377 @@
+{% extends "bootstrap/base.html" %}
+
+{# 定义网页属性 #}
+{% block html_attribs %} lang="zh"{% endblock %}
+
+{# 定义网页head头部中全部的内容 #}
+{% block head %}
+    {{ super() }}
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ url_for('.static', filename='images/pics/xiaohui.ico')}}"
+          type="image/vnd.microsoft.icon">
+    <link rel="stylesheet" href="{{url_for('.static',filename='css/justified-nav0.css')}}">
+    {# 外部样式表的每一次更改都需要删除再新建样式表 更改样式不成功时查看网页源代码 #}
+    <link rel="stylesheet" href="{{url_for('.static',filename='css/navbar-a.css')}}">
+{% endblock %}
+
+{# 网页标题 #}
+{% block title %}SCNU-Websites{% endblock %}
+
+{# 网页导航栏 #}
+{% block navbar %}
+    <div class="navbar-wrapper" >
+        <div>
+            <nav class="navbar navbar-inverse navbar-static-top"
+                 role="navigation" style="border-radius: 4px">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                                aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand">
+                            <img src="../static/images/pics/navbarXiaohui.png"
+                                 style="width: 54px;height: 54px;position: relative;top: -17px;">
+                        </a>
+                        <a class="navbar-brand" href="{{ url_for('home') }}" style="font-family: inherit"><strong>华师校园通</strong></a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse" style="font-size: 15px">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="active"><a href="{{ url_for('home') }}">首页</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('introduction') }}">华师简介</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('websites') }}">学校网站</a></li>
+                            <li><a id="navbar-a" href="{{ url_for('offices') }}">学校办事处</a></li>
+                            {#下拉框的制作#}
+                            <li class="dropdown">
+                                <a id="navbar-a" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                                   aria-expanded="false">学校社团 <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ url_for('association_dxc') }}">大学城校区</a></li>
+                                    <li><a href="{{ url_for('association_sp') }}">石牌校区</a></li>
+                                    <li><a href="{{ url_for('association_nh') }}">南海校区</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a>欢迎：{{ userunit }} {{ userxm }} {{ usertype }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+
+{# 网页内容 #}
+{% block content %}
+    <style type="text/css">
+        #websites{
+            position: relative;
+            width: auto;
+            height: 100%;
+        }
+
+        #websites .line{
+            background-color: transparent;
+            width: auto;
+            height: 100%;
+            text-align: center;
+        }
+
+        #websites .line div{
+            display: inline-block;
+            width: 300px;
+            height: 150px;
+            background-color: #FFFFFF;
+        }
+        #websites .line .middle{
+            margin-left: 40px;
+            margin-right: 40px;
+        }
+        #websites .line img{
+            margin-top: 35px;
+            width: 260px;
+            height: 60px;
+            border-radius: 10px;
+        }
+        #websites .line span{
+            text-align: center;
+            margin-top: 10px;
+            display: block; /*span居中的方法*/
+            font-family: 幼圆;
+            font-size: 18px;
+        }
+    </style>
+
+    <div class="container">
+        <div class="jumbotron" style="margin-bottom: 0; margin-top: -20px">
+            <h2>华南师范大学校园网站</h2>
+            <p class="lead">
+                "在这里你可以找到校级官方网站和各学院的学院门户！"
+            </p>
+        </div>
+
+        <div id="websites">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center; font-size: 18px"><b>校园信息</b></h3>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://www.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjxx/官网.png">
+                        </a>
+                        <span>华南师范大学官网</span>
+                    </div>
+                    <div class="middle">
+                        <a href="https://news.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjxx/新闻网.png">
+                       </a>
+                        <span>华南师范大学新闻网</span>
+                    </div>
+                    <div>
+                        <a href="https://yz.scnu.edu.cn" target="_blank">
+                            <img src="../static/images/xjxx/研究生.png">
+                        </a>
+                        <span>华南师范大学研究生招生信息网</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center; font-size: 18px"><b>校园办公</b></h3>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://office.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjbg/校长办公室.png">
+                        </a>
+                        <span>华南师范大学党委、校长办公室</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://jw.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjbg/教务处.png">
+                        </a>
+                        <span>华南师范大学教务处</span>
+                    </div>
+                    <div>
+                        <a href="http://gh.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjbg/工会.png">
+                        </a>
+                        <span>华南师范大学工会</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center; font-size: 18px;"><b>校园应用</b></h3>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="https://sso.scnu.edu.cn/AccountService/user/login.html" target="_blank">
+                            <img src="../static/images/xjyy/统一身份.png">
+                        </a>
+                        <span>华南师范大学统一身份验证平台</span>
+                    </div>
+                    <div class="middle">
+                        <a href="https://ssp.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/综合服务平台.png">
+                        </a>
+                        <span>华南师范大学综合服务平台</span>
+                    </div>
+                    <div>
+                        <a href="https://jwc.scnu.edu.cn/default2.aspx" target="_blank">
+                            <img src="../static/images/xjyy/教务.png">
+                        </a>
+                        <span>华南师范大学教务管理系统</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://lib.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/图书馆.png">
+                        </a>
+                        <span>华南师范大学图书馆</span>
+                    </div>
+                    <div class="middle">
+                        <a href="https://unitown.scnu.edu.cn" target="_blank">
+                            <img src="../static/images/xjyy/十校.png">
+                        </a>
+                        <span>广州大学城高校互选课程系统</span>
+                    </div>
+                    <div>
+                        <a href="https://fzskc.scnu.edu.cn/Default.aspx" target="_blank">
+                            <img src="../static/images/xjyy/非正式.png">
+                        </a>
+                        <span>华南师范大学非正式课程系统</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="https://moodle.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/砺儒云.png">
+                        </a>
+                        <span>华南师范大学砺儒云课堂</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://gxk.gdou.com/Platform/StudentPlatform.html" target="_blank">
+                            <img src="../static/images/xjyy/网络教室.png">
+                        </a>
+                        <span>华南师范大学网络公选课室</span>
+                    </div>
+                    <div>
+                        <a href="http://nc.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/网络中心.png">
+                        </a>
+                        <span>华南师范大学网络中心</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://pay.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/收费服务.png">
+                        </a>
+                        <span>华南师范大学收费服务管理系统</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://banshi.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/xjyy/办事流程.png" style="height: 50px;width: 150px">
+                        </a>
+                        <span>华南师范大学校园办事流程</span>
+                    </div>
+                    <div>
+                        <img src="../static/images/pics/whitePicture.jpg">
+                        <span>敬请期待！</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title" style="text-align: center; font-size: 18px"><b>学院门户</b></h3>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://yjsy.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/研究生院.png">
+                        </a>
+                        <span>华南师范大学研究生院</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://yjszx.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/研究生在线.png">
+                        </a>
+                        <span>华南师范大学研究生在线</span>
+                    </div>
+                    <div>
+                        <a href="http://em.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/经管.png">
+                        </a>
+                        <span>华南师范大学经济与管理学院</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="https://physics.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/物电.png">
+                        </a>
+                        <span>华南师范大学物理与电信工程学院</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://wxy.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/文院.png">
+                        </a>
+                        <span>华南师范大学文学院</span>
+                    </div>
+                    <div>
+                        <a href="http://ggy.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/公管.png">
+                        </a>
+                        <span>华南师范大学公共管理学院</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://sport.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/体科.png">
+                        </a>
+                        <span>华南师范大学体育科学学院</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://ioe.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/光电.png">
+                        </a>
+                        <span>华南师范大学信息光电子科技学院</span>
+                    </div>
+                    <div>
+                        <a href="http://sce.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/化环.png">
+                        </a>
+                        <span>华南师范大学化学与环境学院</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://fxy.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/法学院.png">
+                        </a>
+                        <span>华南师范大学法学院</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://stm.scnu.edu.cn/index.html" target="_blank">
+                            <img src="../static/images/yjwz/旅管.png">
+                        </a>
+                        <span>华南师范大学旅游管理学院</span>
+                    </div>
+                    <div>
+                        <a href="http://music.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/音院.png">
+                        </a>
+                        <span>华南师范大学音乐学院</span>
+                    </div>
+                </div>
+                <div class="line">
+                    <div>
+                        <a href="http://aoe.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/光电研究院.png">
+                        </a>
+                        <span>华南先进光电子研究院</span>
+                    </div>
+                    <div class="middle">
+                        <a href="http://es.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/创院.png">
+                        </a>
+                        <span>华南师范大学创业学院</span>
+                    </div>
+                    <div>
+                        <a href="http://seri.scnu.edu.cn/" target="_blank">
+                            <img src="../static/images/yjwz/环境研究院.png">
+                        </a>
+                        <span>华南师范大学环境研究院</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer" style="text-align: center">
+            <p>&copy; 2019 Joywvii, SCNU.</p>
+        </footer>
+
+        <a href="#" style="position:fixed;right:3%;bottom:10%;text-decoration-line: none"
+           data-toggle="tooltip" data-placement="bottom" data-trigger="hover" title="回到顶部">
+            <span class="glyphicon glyphicon-chevron-up" style="font-size: 35px; color: black"></span>
+        </a>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script type="text/javascript" src="{{ url_for('static', filename='js/MyJs.js') }}"></script>
+{% endblock %}

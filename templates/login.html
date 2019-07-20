@@ -1,0 +1,25 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Login{% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="../static/images/pics/xiaohui.ico" type="image/vnd.microsoft.icon">
+{% endblock %}
+
+{% block content %}
+    <body style="background-image: url('../static/images/pics/loginXiaomen2.jpg'); background-size: 100%">
+        <div class="page-header">
+            <h1 style="text-align: center; color: white; margin-top: 4%"><img src="../static/images/pics/loginXiaoming.png">学工信息登陆</h1>
+        </div>
+        <div style="color: white; font-size: large; margin-left: 35%; margin-right: 35%; margin-top: 5%">
+            {{ wtf.quick_form(form) }}
+            {% for message in get_flashed_messages() %}
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <strong>Error：</strong>{{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    </body>
+{% endblock %}
