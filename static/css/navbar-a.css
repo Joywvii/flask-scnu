@@ -1,0 +1,35 @@
+#navbar #navbar-a {
+    color: #9d9d9d;
+    position: relative;
+}
+#navbar #navbar-a::before,
+#navbar #navbar-a::after{
+    width: 14px;
+    height: 14px;
+    content: "";
+    position: absolute;
+    transition: all 0.35s ease;
+    opacity: 0;
+}
+#navbar #navbar-a:hover{
+    color: #ffffff;
+}
+#navbar #navbar-a::after{
+    right: 0;
+    top: 0;
+    border-right: 3px solid #ffffff;
+    border-top: 3px solid #ffffff;
+    transform: translate(-100%,50%);
+}
+#navbar #navbar-a::before{
+    left: 0;
+    bottom: 0;
+    border-left: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+    transform: translate(100%,-50%);
+}
+#navbar #navbar-a:hover::before,
+#navbar #navbar-a:hover::after{
+    transform: translate(0%,0%);
+    opacity: 1;
+}
